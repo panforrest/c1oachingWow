@@ -59,15 +59,6 @@ var Results = (function (Component) {
         },
         addItem: {
             value: function addItem() {
-                // // console.log('ADD ITEM: ' + JSON.stringify(this.state.item))
-                // let newItem = Object.assign({}, this.state.item)
-                // const len = this.props.item.all.length+1
-                // newItem['id'] = len.toString()
-                // // newItem['id'] = 100
-                // // newItem['key'] = '100'
-                // // newItem['defaultAnimation'] = 2
-                // newItem['position'] = this.props.map.currentLocation
-                // this.props.addItem(newItem)
                 if (this.props.account.currentUser == null) {
                     alert("Please log in or register to sell items");
                     return;
@@ -75,6 +66,7 @@ var Results = (function (Component) {
 
                 var currentUser = this.props.account.currentUser;
                 var updated = Object.assign({}, this.state.item);
+                updated.position = this.props.map.currentLocation;
                 updated.seller = {
                     id: currentUser.id,
                     username: currentUser.username,
