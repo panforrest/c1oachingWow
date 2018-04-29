@@ -1,3 +1,13 @@
+               //          <div className="row">
+                              // <ul id="reservations">                             
+                              //   <li class="reservation">
+                              //     Item1 
+                              //   </li> 
+            //                     <li class="reservation">
+            //                       Item2
+            //                     </li>                                        
+                              // </ul>
+                  //       </div>
 import React, { Component } from 'react'
 import { Search } from './containers'
 import { Results } from './containers'
