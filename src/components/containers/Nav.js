@@ -1,6 +1,3 @@
-			    // <a class="nav-tab" href="#">Dashboard</a>
-			    // <a class="nav-tab" href="#">Reservations</a>
-			    // <a class="nav-tab" href="#"> Profiles </a>
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
@@ -12,7 +9,9 @@ class Nav extends Component {
 		return (
             <nav>
 			    <span class="navbar-brand mb-0 h1">CoachingWow</span>
-
+			    <a class="nav-tab" href="#">Dashboard</a>
+			    <a class="nav-tab" href="#">Reservations</a>
+			    <a class="nav-tab" href="#"> Profiles </a>
 			    <a class="nav-tab" href="#"> { (currentUser==null) ? null: <p>Welcome, {currentUser.username}</p> } </a>
 			</nav>
 		)

@@ -135,14 +135,14 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([392,0]);
+/******/ 	deferredModules.push([394,0]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 148:
+/***/ 149:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -153,11 +153,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Map = exports.Item = undefined;
 
-var _Map = __webpack_require__(371);
+var _Map = __webpack_require__(373);
 
 var _Map2 = _interopRequireDefault(_Map);
 
-var _Item = __webpack_require__(175);
+var _Item = __webpack_require__(177);
 
 var _Item2 = _interopRequireDefault(_Item);
 
@@ -171,7 +171,7 @@ exports.Map = _Map2.default;
 
 /***/ }),
 
-/***/ 152:
+/***/ 155:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -195,10 +195,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // <a class="nav-tab" href="#">Dashboard</a>
-// <a class="nav-tab" href="#">Reservations</a>
-// <a class="nav-tab" href="#"> Profiles </a>
-
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Nav = function (_Component) {
 	_inherits(Nav, _Component);
@@ -222,6 +219,21 @@ var Nav = function (_Component) {
 					'span',
 					{ 'class': 'navbar-brand mb-0 h1' },
 					'CoachingWow'
+				),
+				_react2.default.createElement(
+					'a',
+					{ 'class': 'nav-tab', href: '#' },
+					'Dashboard'
+				),
+				_react2.default.createElement(
+					'a',
+					{ 'class': 'nav-tab', href: '#' },
+					'Reservations'
+				),
+				_react2.default.createElement(
+					'a',
+					{ 'class': 'nav-tab', href: '#' },
+					' Profiles '
 				),
 				_react2.default.createElement(
 					'a',
@@ -252,7 +264,7 @@ exports.default = (0, _reactRedux.connect)(stateToProps)(Nav);
 
 /***/ }),
 
-/***/ 153:
+/***/ 156:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -268,13 +280,21 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _presentation = __webpack_require__(148);
+var _presentation = __webpack_require__(149);
 
 var _reactRedux = __webpack_require__(39);
 
-var _actions = __webpack_require__(93);
+var _actions = __webpack_require__(94);
 
 var _actions2 = _interopRequireDefault(_actions);
+
+var _reactDropzone = __webpack_require__(154);
+
+var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
+
+var _turbo = __webpack_require__(93);
+
+var _turbo2 = _interopRequireDefault(_turbo);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -314,15 +334,57 @@ var Results = function (_Component) {
     }, {
         key: 'addItem',
         value: function addItem() {
-            // console.log('ADD ITEM: ' + JSON.stringify(this.state.item))
-            var newItem = Object.assign({}, this.state.item);
-            var len = this.props.item.all.length + 1;
-            newItem['id'] = len.toString();
-            // newItem['id'] = 100
-            // newItem['key'] = '100'
-            // newItem['defaultAnimation'] = 2
-            newItem['position'] = this.props.map.currentLocation;
-            this.props.addItem(newItem);
+            // // console.log('ADD ITEM: ' + JSON.stringify(this.state.item))
+            // let newItem = Object.assign({}, this.state.item)
+            // const len = this.props.item.all.length+1
+            // newItem['id'] = len.toString()
+            // // newItem['id'] = 100
+            // // newItem['key'] = '100'
+            // // newItem['defaultAnimation'] = 2
+            // newItem['position'] = this.props.map.currentLocation
+            // this.props.addItem(newItem)
+            if (this.props.account.currentUser == null) {
+                alert('Please log in or register to sell items');
+                return;
+            }
+
+            var currentUser = this.props.account.currentUser;
+            var updated = Object.assign({}, this.state.itme);
+            updated['seller'] = {
+                id: currentUser.id,
+                username: currentUser.username,
+                image: currentUser.image || ''
+            };
+
+            console.log('ADD ITEM: ' + JSON.stringify(updated));
+            this.props.addItem(updated).then(function (data) {
+                console.log('ITEM ADDED: ' + JSON.stringify(data));
+            }).catch(function (err) {
+                console.log('ERR: ' + err.message);
+            });
+        }
+    }, {
+        key: 'uploadImage',
+        value: function uploadImage(files) {
+            var _this2 = this;
+
+            var image = files[0];
+            console.log('uploadImage: ' + image.name);
+            var turboClient = (0, _turbo2.default)({
+                site_id: '5ae5315e0d44f900146683d0'
+            });
+
+            turboClient.uploadFile(image).then(function (data) {
+                // console.log('FILE UPLOADED: ' + JSON.stringify(data))
+                // console.log('FILE UPLOADED: ' + data.result.url)
+                var updated = Object.assign({}, _this2.state.item);
+                updated['image'] = data.result.url;
+                _this2.setState({
+                    item: updated
+                });
+            }).catch(function (err) {
+                console.log('UPLOAD ERROR: ' + err.message);
+            });
         }
     }, {
         key: 'render',
@@ -353,9 +415,16 @@ var Results = function (_Component) {
                 _react2.default.createElement('input', { onChange: this.updateItem.bind(this, 'price'), className: 'formControl', type: 'text', placeholder: 'Price' }),
                 _react2.default.createElement('br', null),
                 _react2.default.createElement('br', null),
+                this.state.item.image == null ? null : _react2.default.createElement('img', { src: this.state.item.image + '=s120-c' }),
+                _react2.default.createElement('hr', null),
                 _react2.default.createElement(
                     'div',
                     null,
+                    _react2.default.createElement(
+                        _reactDropzone2.default,
+                        { onDrop: this.uploadImage.bind(this), className: 'btn btn-info btn-fill', style: { marginRight: 16 } },
+                        'Add Image'
+                    ),
                     _react2.default.createElement(
                         'button',
                         { onClick: this.addItem.bind(this), className: 'btn btn-success' },
@@ -396,7 +465,7 @@ exports.default = (0, _reactRedux.connect)(stateToProps, dispatchToProps)(Result
 
 /***/ }),
 
-/***/ 154:
+/***/ 157:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -486,14 +555,14 @@ exports.default = {
 
 /***/ }),
 
-/***/ 155:
+/***/ 158:
 /***/ (function(module) {
 
 module.exports = {"name":"c1oachingWow","version":"0.0.0","server":false,"private":true,"scripts":{"dev":"webpack --mode development -w","build":"npm run clean && NODE_ENV=production webpack -p && gulp prod","clean":"rm -rf ./public/dist","postinstall":"npm run build"},"dependencies":{"accepts":"^1.3.5","array-flatten":"1.1.1","bluebird":"^3.5.1","body-parser":"1.18.2","content-disposition":"0.5.2","content-type":"^1.0.4","cookie":"0.3.1","cookie-signature":"1.0.6","debug":"2.6.9","depd":"^1.1.2","dotenv":"^5.0.1","encodeurl":"^1.0.2","escape-html":"^1.0.3","etag":"^1.8.1","finalhandler":"1.1.1","fresh":"0.5.2","merge-descriptors":"1.0.1","methods":"^1.1.2","moment":"^2.20.1","nodemon":"^1.17.1","on-finished":"^2.3.0","parseurl":"^1.3.2","path-to-regexp":"0.1.7","proxy-addr":"^2.0.3","qs":"6.5.1","range-parser":"^1.2.0","react":"^16.2.0","react-bootstrap":"^0.32.1","react-dom":"^16.2.0","react-dropzone":"^4.2.8","react-google-maps":"^9.4.5","react-redux":"^5.0.7","react-time":"^4.3.0","redux":"^3.7.2","redux-thunk":"^2.2.0","safe-buffer":"5.1.1","send":"0.16.2","serve-static":"1.13.2","setprototypeof":"1.1.0","statuses":"^1.4.0","superagent":"^3.8.2","turbo360":"latest","type-is":"^1.6.16","utils-merge":"1.0.1","vary":"^1.1.2","vertex360":"latest"},"devDependencies":{"babel-core":"^6.26.0","babel-loader":"^7.1.3","babel-preset-env":"^1.6.1","babel-preset-react":"^6.24.1","chai":"^4.1.2","chai-http":"^3.0.0","cross-env":"^5.1.4","gulp":"^3.9.1","gulp-6to5":"^3.0.0","gulp-autoprefixer":"^5.0.0","gulp-clean-css":"^3.9.2","gulp-concat":"^2.6.1","gulp-less":"^4.0.0","gulp-rename":"^1.2.2","gulp-sass":"^3.1.0","gulp-uglify":"^3.0.0","json-loader":"^0.5.7","mocha":"^5.0.1","mocha-jscs":"^5.0.1","mocha-jshint":"^2.3.1","rimraf":"^2.6.2","uglifyjs-webpack-plugin":"^1.2.2","webpack":"^4.1.1","webpack-cli":"^2.0.10"},"deploy":["."],"format":"vertex","app":""};
 
 /***/ }),
 
-/***/ 173:
+/***/ 175:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -503,11 +572,11 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _turbo = __webpack_require__(172);
+var _turbo = __webpack_require__(93);
 
 var _turbo2 = _interopRequireDefault(_turbo);
 
-var _package = __webpack_require__(155);
+var _package = __webpack_require__(158);
 
 var _package2 = _interopRequireDefault(_package);
 
@@ -654,7 +723,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 174:
+/***/ 176:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -665,11 +734,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.HTTPAsync = exports.TurboClient = undefined;
 
-var _TurboClient = __webpack_require__(173);
+var _TurboClient = __webpack_require__(175);
 
 var _TurboClient2 = _interopRequireDefault(_TurboClient);
 
-var _HTTPAsync = __webpack_require__(154);
+var _HTTPAsync = __webpack_require__(157);
 
 var _HTTPAsync2 = _interopRequireDefault(_HTTPAsync);
 
@@ -680,7 +749,7 @@ exports.HTTPAsync = _HTTPAsync2.default;
 
 /***/ }),
 
-/***/ 175:
+/***/ 177:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -748,7 +817,7 @@ var localStyle = {
 
 /***/ }),
 
-/***/ 371:
+/***/ 373:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -766,7 +835,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactGoogleMaps = __webpack_require__(370);
+var _reactGoogleMaps = __webpack_require__(372);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -854,7 +923,7 @@ exports.default = (0, _reactGoogleMaps.withGoogleMap)(Map);
 
 /***/ }),
 
-/***/ 372:
+/***/ 374:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -870,11 +939,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _presentation = __webpack_require__(148);
+var _presentation = __webpack_require__(149);
 
 var _reactRedux = __webpack_require__(39);
 
-var _actions = __webpack_require__(93);
+var _actions = __webpack_require__(94);
 
 var _actions2 = _interopRequireDefault(_actions);
 
@@ -985,7 +1054,7 @@ exports.default = (0, _reactRedux.connect)(stateToProps, dispatchToProps)(Search
 
 /***/ }),
 
-/***/ 373:
+/***/ 375:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -996,15 +1065,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Nav = exports.Search = exports.Results = undefined;
 
-var _Search = __webpack_require__(372);
+var _Search = __webpack_require__(374);
 
 var _Search2 = _interopRequireDefault(_Search);
 
-var _Results = __webpack_require__(153);
+var _Results = __webpack_require__(156);
 
 var _Results2 = _interopRequireDefault(_Results);
 
-var _Nav = __webpack_require__(152);
+var _Nav = __webpack_require__(155);
 
 var _Nav2 = _interopRequireDefault(_Nav);
 
@@ -1023,7 +1092,7 @@ exports.Nav = _Nav2.default; /* * * * * * * * * * * * * * * * * * * * * * * * * 
 
 /***/ }),
 
-/***/ 374:
+/***/ 376:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1039,7 +1108,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _containers = __webpack_require__(373);
+var _containers = __webpack_require__(375);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1107,7 +1176,7 @@ exports.default = Home;
 
 /***/ }),
 
-/***/ 377:
+/***/ 379:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1150,117 +1219,6 @@ exports.default = function () {
 		// 	array.unshift(action.data)
 		// 	newState['all'] = array
 		// 	return newState
-
-		default:
-			return state;
-	}
-};
-
-/***/ }),
-
-/***/ 378:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _constants = __webpack_require__(38);
-
-var _constants2 = _interopRequireDefault(_constants);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var initialState = {
-	currentLocation: { lat: 40.72, lng: -73.98 }
-};
-
-exports.default = function () {
-	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-	var action = arguments[1];
-
-	var updated = Object.assign({}, state);
-	switch (action.type) {
-
-		case _constants2.default.ITEM_ADDED:
-			console.log('LOCATION_CHANGED: ' + JSON.stringify(action.data));
-			updated['currentLocation'] = action.data;
-			return updated;
-
-		// case constants.CURRENT_USER_RECEIVED:
-		// 	newState['currentUser'] = action.data
-		// 	return newState
-
-		// case constants.USERS_RECEIVED:
-		// 	newState['all'] = action.data
-		// 	return newState
-
-		// case constants.USER_CREATED:
-		// 	let array = (newState.all) ? Object.assign([], newState.all) : []
-		// 	array.unshift(action.data)
-		// 	newState['all'] = array
-		// 	return newState
-
-		default:
-			return updated;
-	}
-};
-
-/***/ }),
-
-/***/ 379:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _constants = __webpack_require__(38);
-
-var _constants2 = _interopRequireDefault(_constants);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var initialState = {
-	all: [{ id: '1', price: 10, name: 'Ping Pong', image: 'https://hoodrhetoric.com/wp-content/uploads/2016/08/Air-Jordan-1-Retro-High-OG-Banned-Black-White-555088-001.jpg', position: { lat: 40.7224017, lng: -73.9896719 }, seller: { username: 'lebron_james', image: 'http://cdn.hoopshype.com/i/de/74/ac/lebron-james.png' } }, { id: '2', price: 20, name: 'Dance', image: 'https://smhttp-ssl-18667.nexcesscdn.net/media/catalog/product/cache/1/image/400x400/9df78eab33525d08d6e5fb8d27136e95/s/i/sig-7970018-sofa-chise-3.jpg', position: { lat: 40.7124017, lng: -73.9996719 }, seller: { username: 'eli_manning', image: 'http://cdn.hoopshype.com/i/de/74/ac/lebron-james.png' } }, { id: '3', price: 30, name: 'Rock Climbing', image: 'https://d2uk7vc0yceq94.cloudfront.net/uploads/2017/08/25/s/0/1/12707801/PV2H-5.jpeg', position: { lat: 40.7024017, lng: -73.999671996719 }, seller: { username: 'tom_brady', image: 'http://cdn.hoopshype.com/i/de/74/ac/lebron-james.png' } }]
-
-};
-
-exports.default = function () {
-	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
-	var action = arguments[1];
-
-	var updatedState = Object.assign({}, state);
-
-	switch (action.type) {
-		case _constants2.default.ITEM_ADDED:
-			console.log('ITEM_ADDED: ' + JSON.stringify(action.data));
-			// let all = Object.assign([], newState.all)
-			var all = updatedState.all ? Object.assign([], updatedState.all) : [];
-			all.push(action.data);
-			updatedState['all'] = all;
-			return updatedState;
-
-		// case constants.USER_CREATED:
-		// 	let array = (newState.all) ? Object.assign([], newState.all) : []
-		// 	array.unshift(action.data)
-		// 	newState['all'] = array
-		// 	return newState
-
-		// case constants.CURRENT_USER_RECEIVED:
-		// 	newState['currentUser'] = action.data
-		// 	return newState
-
-		// case constants.USERS_RECEIVED:
-		// 	newState['all'] = action.data
-		// 	return newState
-
 
 		default:
 			return state;
@@ -1318,6 +1276,122 @@ var _constants2 = _interopRequireDefault(_constants);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var initialState = {
+	currentLocation: { lat: 40.72, lng: -73.98 }
+};
+
+exports.default = function () {
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	var action = arguments[1];
+
+	var updated = Object.assign({}, state);
+	switch (action.type) {
+
+		case _constants2.default.ITEM_ADDED:
+			console.log('LOCATION_CHANGED: ' + JSON.stringify(action.data));
+			updated['currentLocation'] = action.data;
+			return updated;
+
+		// case constants.CURRENT_USER_RECEIVED:
+		// 	newState['currentUser'] = action.data
+		// 	return newState
+
+		// case constants.USERS_RECEIVED:
+		// 	newState['all'] = action.data
+		// 	return newState
+
+		// case constants.USER_CREATED:
+		// 	let array = (newState.all) ? Object.assign([], newState.all) : []
+		// 	array.unshift(action.data)
+		// 	newState['all'] = array
+		// 	return newState
+
+		default:
+			return updated;
+	}
+};
+
+/***/ }),
+
+/***/ 381:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _constants = __webpack_require__(38);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var initialState = {
+	// all: [
+	//         {id:'1', price:10, name:'Ping Pong', image: 'https://hoodrhetoric.com/wp-content/uploads/2016/08/Air-Jordan-1-Retro-High-OG-Banned-Black-White-555088-001.jpg', position:{lat:40.7224017, lng:-73.9896719}, seller:{username:'lebron_james',image:'http://cdn.hoopshype.com/i/de/74/ac/lebron-james.png'}},
+	//         {id:'2', price:20, name:'Dance', image: 'https://smhttp-ssl-18667.nexcesscdn.net/media/catalog/product/cache/1/image/400x400/9df78eab33525d08d6e5fb8d27136e95/s/i/sig-7970018-sofa-chise-3.jpg', position:{lat:40.7124017, lng:-73.9996719}, seller:{username:'eli_manning',image:'http://cdn.hoopshype.com/i/de/74/ac/lebron-james.png'}},
+	//         {id:'3', price:30, name:'Rock Climbing', image: 'https://d2uk7vc0yceq94.cloudfront.net/uploads/2017/08/25/s/0/1/12707801/PV2H-5.jpeg', position:{lat:40.7024017, lng:-73.999671996719}, seller:{username:'tom_brady',image:'http://cdn.hoopshype.com/i/de/74/ac/lebron-james.png'}}
+	//        ]
+	all: null
+};
+
+exports.default = function () {
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	var action = arguments[1];
+
+	var updatedState = Object.assign({}, state);
+
+	switch (action.type) {
+		case _constants2.default.ITEM_ADDED:
+			var payload = action.data;
+			console.log('ITEM_ADDED: ' + JSON.stringify(payload.data));
+			// let all = Object.assign([], newState.all)
+			var all = updatedState.all ? Object.assign([], updatedState.all) : [];
+			all.push(payload.data);
+			updatedState['all'] = all;
+			return updatedState;
+
+		// case constants.USER_CREATED:
+		// 	let array = (newState.all) ? Object.assign([], newState.all) : []
+		// 	array.unshift(action.data)
+		// 	newState['all'] = array
+		// 	return newState
+
+		// case constants.CURRENT_USER_RECEIVED:
+		// 	newState['currentUser'] = action.data
+		// 	return newState
+
+		// case constants.USERS_RECEIVED:
+		// 	newState['all'] = action.data
+		// 	return newState
+
+
+		default:
+			return updatedState;
+	}
+};
+
+/***/ }),
+
+/***/ 382:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _constants = __webpack_require__(38);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
 	This is a sample reducer or user management. If you remove 
 	and use your own reducers, remember to update the store 
@@ -1359,7 +1433,7 @@ exports.default = function () {
 
 /***/ }),
 
-/***/ 381:
+/***/ 383:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1370,19 +1444,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.accountReducer = exports.mapReducer = exports.itemReducer = exports.userReducer = undefined;
 
-var _userReducer = __webpack_require__(380);
+var _userReducer = __webpack_require__(382);
 
 var _userReducer2 = _interopRequireDefault(_userReducer);
 
-var _itemReducer = __webpack_require__(379);
+var _itemReducer = __webpack_require__(381);
 
 var _itemReducer2 = _interopRequireDefault(_itemReducer);
 
-var _mapReducer = __webpack_require__(378);
+var _mapReducer = __webpack_require__(380);
 
 var _mapReducer2 = _interopRequireDefault(_mapReducer);
 
-var _accountReducer = __webpack_require__(377);
+var _accountReducer = __webpack_require__(379);
 
 var _accountReducer2 = _interopRequireDefault(_accountReducer);
 
@@ -1400,7 +1474,7 @@ exports.accountReducer = _accountReducer2.default;
 
 /***/ }),
 
-/***/ 384:
+/***/ 386:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1412,11 +1486,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(87);
 
-var _reduxThunk = __webpack_require__(382);
+var _reduxThunk = __webpack_require__(384);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reducers = __webpack_require__(381);
+var _reducers = __webpack_require__(383);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1458,7 +1532,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 392:
+/***/ 394:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1472,13 +1546,13 @@ var _reactDom = __webpack_require__(84);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _stores = __webpack_require__(384);
+var _stores = __webpack_require__(386);
 
 var _stores2 = _interopRequireDefault(_stores);
 
 var _reactRedux = __webpack_require__(39);
 
-var _Home = __webpack_require__(374);
+var _Home = __webpack_require__(376);
 
 var _Home2 = _interopRequireDefault(_Home);
 
@@ -1496,7 +1570,7 @@ _reactDom2.default.render(app, document.getElementById('root'));
 
 /***/ }),
 
-/***/ 93:
+/***/ 94:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1510,7 +1584,7 @@ var _constants = __webpack_require__(38);
 
 var _constants2 = _interopRequireDefault(_constants);
 
-var _utils = __webpack_require__(174);
+var _utils = __webpack_require__(176);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1523,15 +1597,18 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = {
 
 	addItem: function addItem(item) {
-		return {
-			type: 'ITEM_ADDED',
-			data: item
+		// return {
+		// 	type: 'ITEM_ADDED',
+		// 	data: item
+		// }
+		return function (dispatch) {
+			return dispatch(_utils.HTTPAsync.post('/api/item', item, _constants2.default.ITEM_ADDED));
 		};
 	},
 
 	locationChanged: function locationChanged(location) {
 		return {
-			type: 'LOCATION_CHANGED',
+			type: _constants2.default.LOCATION_CHANGED,
 			data: location
 		};
 	},
