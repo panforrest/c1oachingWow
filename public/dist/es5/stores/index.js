@@ -9,7 +9,12 @@ var applyMiddleware = _redux.applyMiddleware;
 var combineReducers = _redux.combineReducers;
 var thunk = _interopRequire(require("redux-thunk"));
 
-var userReducer = require("../reducers").userReducer;
+var _reducers = require("../reducers");
+
+var userReducer = _reducers.userReducer;
+var itemReducer = _reducers.itemReducer;
+var mapReducer = _reducers.mapReducer;
+var accountReducer = _reducers.accountReducer;
 
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -26,7 +31,10 @@ module.exports = {
 		// initialState can be null
 
 		var reducers = combineReducers({ // insert reducers here
-			user: userReducer
+			user: userReducer,
+			item: itemReducer,
+			map: mapReducer,
+			account: accountReducer
 		});
 
 		if (initialState) {

@@ -15,6 +15,12 @@ class Results extends Component {
     	}
     }
 
+    componentDidMount(){
+        
+        console.log('componentDidMount: ')
+        this.props.fetchItems()
+    }
+
     updateItem(attr, event){
         event.preventDefault()
         console.log(attr + ' == ' + event.target.value)
@@ -137,7 +143,8 @@ const stateToProps = (state) => {
 
 const dispatchToProps = (dispatch) => {
     return {
-        addItem: (item) => dispatch(actions.addItem(item))
+        addItem: (item) => dispatch(actions.addItem(item)),
+        fetchItems: (params) => dispatch(actions.fetchItems(params))
     }
 }
 

@@ -9,9 +9,16 @@ var _interopRequire = function (obj) { return obj && obj.__esModule ? obj["defau
 * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 */
 
-var Users = _interopRequire(require("./Users"));
+// import Users from './Users'
+var Search = _interopRequire(require("./Search"));
 
-exports.Users = Users;
+var Results = _interopRequire(require("./Results"));
+
+var Nav = _interopRequire(require("./Nav"));
+
+exports.Results = Results;
+exports.Search = Search;
+exports.Nav = Nav;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });

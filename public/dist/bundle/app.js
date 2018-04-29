@@ -195,7 +195,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // <a class="nav-tab" href="#">Dashboard</a>
+// <a class="nav-tab" href="#">Reservations</a>
+// <a class="nav-tab" href="#"> Profiles </a>
+
 
 var Nav = function (_Component) {
 	_inherits(Nav, _Component);
@@ -219,21 +222,6 @@ var Nav = function (_Component) {
 					'span',
 					{ 'class': 'navbar-brand mb-0 h1' },
 					'CoachingWow'
-				),
-				_react2.default.createElement(
-					'a',
-					{ 'class': 'nav-tab', href: '#' },
-					'Dashboard'
-				),
-				_react2.default.createElement(
-					'a',
-					{ 'class': 'nav-tab', href: '#' },
-					'Reservations'
-				),
-				_react2.default.createElement(
-					'a',
-					{ 'class': 'nav-tab', href: '#' },
-					' Profiles '
 				),
 				_react2.default.createElement(
 					'a',
@@ -321,6 +309,13 @@ var Results = function (_Component) {
     }
 
     _createClass(Results, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+
+            console.log('componentDidMount: ');
+            this.props.fetchItems();
+        }
+    }, {
         key: 'updateItem',
         value: function updateItem(attr, event) {
             event.preventDefault();
@@ -457,6 +452,9 @@ var dispatchToProps = function dispatchToProps(dispatch) {
     return {
         addItem: function addItem(item) {
             return dispatch(_actions2.default.addItem(item));
+        },
+        fetchItems: function fetchItems(params) {
+            return dispatch(_actions2.default.fetchItems(params));
         }
     };
 };
@@ -1247,7 +1245,8 @@ exports.default = {
 
 	ITEM_ADDED: 'ITEM_ADDED',
 	LOCATION_CHANGED: 'LOCATION_CHANGED',
-	CURRENT_USER_RECEIVED: 'CURRENT_USER_RECEIVED'
+	CURRENT_USER_RECEIVED: 'CURRENT_USER_RECEIVED',
+	ITEMS_RECEIVED: 'ITEMS_RECEIVED'
 	// USER_LOGGED_IN: 		'USER_LOGGED_IN',
 	// CURRENT_USER_RECEIVED: 	'CURRENT_USER_RECEIVED'
 
@@ -1352,6 +1351,11 @@ exports.default = function () {
 			var all = updatedState.all ? Object.assign([], updatedState.all) : [];
 			all.push(payload.data);
 			updatedState['all'] = all;
+			return updatedState;
+
+		case _constants2.default.ITEMS_RECEIVED:
+			// console.log('ITEMS_RECEIVED: ' + JSON.stringify(action.data))
+			updatedState['all'] = action.data.data;
 			return updatedState;
 
 		// case constants.USER_CREATED:
@@ -1603,6 +1607,12 @@ exports.default = {
 		// }
 		return function (dispatch) {
 			return dispatch(_utils.HTTPAsync.post('/api/item', item, _constants2.default.ITEM_ADDED));
+		};
+	},
+
+	fetchItems: function fetchItems(params) {
+		return function (dispatch) {
+			return dispatch(_utils.HTTPAsync.get('/api/item', params, _constants2.default.ITEMS_RECEIVED));
 		};
 	},
 

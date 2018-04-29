@@ -19,6 +19,13 @@ export default {
 		}
 	},
 
+	
+	fetchItems: (params) => {
+		return dispatch => {
+			return dispatch(HTTPAsync.get('/api/item', params, constants.ITEMS_RECEIVED))
+		}
+	},
+
 	locationChanged: (location) => {
 		return {
 			type: constants.LOCATION_CHANGED,
