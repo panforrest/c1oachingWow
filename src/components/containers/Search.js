@@ -13,6 +13,10 @@ class Search extends Component {
 		}
 	}
 
+	componentDidMount(){
+        this.props.currentUser()  //MISSING () CAN CAUSE THE accountReducer NOT CONSOLE LOG
+	}
+
 	centerChanged(center){
 		console.log('centerChanged: '+JSON.stringify(center))
 		this.props.locationChanged(center)
@@ -78,7 +82,8 @@ const stateToProps = (state) => {
 
 const dispatchToProps = (dispatch) => {
 	return {
-        locationChanged: (location) => dispatch(actions.locationChanged(location))
+        locationChanged: (location) => dispatch(actions.locationChanged(location)),
+        currentUser: () => dispatch(actions.currentUser())
 	}
 }
 

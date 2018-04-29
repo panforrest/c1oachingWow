@@ -1,0 +1,103 @@
+body {  padding-top:80px; }
+body.landing {padding: 0; }
+nav { 
+  background-color: #e8e8e8;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+nav .navbar-brand {margin-top: 10px;}
+nav .nav-tab {
+	padding: 20px;
+}
+header {
+	align-items: center;
+	background: url('../images/dog-background-image.jpeg');
+	background-attachment: fixed;
+	background-position: center center;
+	background-size: cover;
+	color: white;
+	display: flex;
+	justify-content: center;
+	height: 80vh;
+	flex-wrap: wrap;
+	padding: 40px 80px;
+	text-align: center;
+	width: 100%;
+	margin: 0 !important;
+}
+
+header h1 {
+	font-size: 72px;
+	font-weight: bold;
+	text-trnasform: uppercase;
+}
+header p {
+	font-weight: 100;
+	font-size: 20px;
+	letter-spacing: 2.5px;
+	line-height: 40px;
+}
+
+form {
+	text-align: center;
+	margin: 0 auto;
+}
+form .input-group {margin: 10px auto; }
+form input {
+	border: 1px solid lightgray !important;
+	border-radius: 8px !important;
+}
+
+#call-to-action div,
+#sign-up div {
+	text-align: center;
+}
+
+#sign-up input { margin: 10px auto; }
+#sign-up .input-group { margin: 0 auto; }
+#reservations { list-style-type: none; }
+#reservations .reservation {
+	align-items: center;
+	border: 1px solid lightgray;
+	border-radius: 8px;
+	display: flex;
+	justify-content: center;
+	margin: 20px;
+	padding: 20px;
+}
+#reservations .reservation img {
+	border-radius: 50%;
+	margin-right: 10px;
+}
+
+#reservations .reservation h2 {
+	margin: 0;
+	margin-right: 10px;
+	padding: 0;
+}
+
+#reservations .reservation button {
+    margin-left: 10px;
+}
+
+#reservations .reservation span {
+	margin-left: auto;
+}
+#reservations .reservation .accepted {
+	padding: 10px;
+	background: #4cbd4c;
+    color: white;
+    border-radius: 8px;
+    margin-left: auto;
+    border: none;
+}
+
+#profile-image {
+	border-radius: 50%;
+}

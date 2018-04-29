@@ -135,7 +135,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([389,0]);
+/******/ 	deferredModules.push([392,0]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -153,11 +153,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.Map = exports.Item = undefined;
 
-var _Map = __webpack_require__(369);
+var _Map = __webpack_require__(371);
 
 var _Map2 = _interopRequireDefault(_Map);
 
-var _Item = __webpack_require__(173);
+var _Item = __webpack_require__(175);
 
 var _Item2 = _interopRequireDefault(_Item);
 
@@ -178,6 +178,87 @@ exports.Map = _Map2.default;
 
 
 Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(39);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // <a class="nav-tab" href="#">Dashboard</a>
+// <a class="nav-tab" href="#">Reservations</a>
+// <a class="nav-tab" href="#"> Profiles </a>
+
+
+var Nav = function (_Component) {
+	_inherits(Nav, _Component);
+
+	function Nav() {
+		_classCallCheck(this, Nav);
+
+		return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).apply(this, arguments));
+	}
+
+	_createClass(Nav, [{
+		key: 'render',
+		value: function render() {
+			// const currentUser = (this.props.user.currentUser==null) ? null: <p>Welcome, {this.props.user.currentUser}</p>
+			var currentUser = this.props.user.currentUser;
+
+			return _react2.default.createElement(
+				'nav',
+				null,
+				_react2.default.createElement(
+					'span',
+					{ 'class': 'navbar-brand mb-0 h1' },
+					'CoachingWow'
+				),
+				_react2.default.createElement(
+					'a',
+					{ 'class': 'nav-tab', href: '#' },
+					' ',
+					currentUser == null ? null : _react2.default.createElement(
+						'p',
+						null,
+						'Welcome, ',
+						currentUser.username
+					),
+					' '
+				)
+			);
+		}
+	}]);
+
+	return Nav;
+}(_react.Component);
+
+var stateToProps = function stateToProps(state) {
+	return {
+		user: state.account
+	};
+};
+
+exports.default = (0, _reactRedux.connect)(stateToProps)(Nav);
+
+/***/ }),
+
+/***/ 153:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
@@ -189,7 +270,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _presentation = __webpack_require__(148);
 
-var _reactRedux = __webpack_require__(59);
+var _reactRedux = __webpack_require__(39);
 
 var _actions = __webpack_require__(93);
 
@@ -298,7 +379,8 @@ var localStyle = {
 var stateToProps = function stateToProps(state) {
     return {
         item: state.item,
-        map: state.map
+        map: state.map,
+        account: state.account
     };
 };
 
@@ -314,14 +396,7 @@ exports.default = (0, _reactRedux.connect)(stateToProps, dispatchToProps)(Result
 
 /***/ }),
 
-/***/ 153:
-/***/ (function(module) {
-
-module.exports = {"name":"c1oachingWow","version":"0.0.0","server":false,"private":true,"scripts":{"dev":"webpack --mode development -w","build":"npm run clean && NODE_ENV=production webpack -p && gulp prod","clean":"rm -rf ./public/dist","postinstall":"npm run build"},"dependencies":{"accepts":"^1.3.5","array-flatten":"1.1.1","bluebird":"^3.5.1","body-parser":"1.18.2","content-disposition":"0.5.2","content-type":"^1.0.4","cookie":"0.3.1","cookie-signature":"1.0.6","debug":"2.6.9","depd":"^1.1.2","dotenv":"^5.0.1","encodeurl":"^1.0.2","escape-html":"^1.0.3","etag":"^1.8.1","finalhandler":"1.1.1","fresh":"0.5.2","merge-descriptors":"1.0.1","methods":"^1.1.2","moment":"^2.20.1","nodemon":"^1.17.1","on-finished":"^2.3.0","parseurl":"^1.3.2","path-to-regexp":"0.1.7","proxy-addr":"^2.0.3","qs":"6.5.1","range-parser":"^1.2.0","react":"^16.2.0","react-bootstrap":"^0.32.1","react-dom":"^16.2.0","react-dropzone":"^4.2.8","react-google-maps":"^9.4.5","react-redux":"^5.0.7","react-time":"^4.3.0","redux":"^3.7.2","redux-thunk":"^2.2.0","safe-buffer":"5.1.1","send":"0.16.2","serve-static":"1.13.2","setprototypeof":"1.1.0","statuses":"^1.4.0","superagent":"^3.8.2","turbo360":"latest","type-is":"^1.6.16","utils-merge":"1.0.1","vary":"^1.1.2","vertex360":"latest"},"devDependencies":{"babel-core":"^6.26.0","babel-loader":"^7.1.3","babel-preset-env":"^1.6.1","babel-preset-react":"^6.24.1","chai":"^4.1.2","chai-http":"^3.0.0","cross-env":"^5.1.4","gulp":"^3.9.1","gulp-6to5":"^3.0.0","gulp-autoprefixer":"^5.0.0","gulp-clean-css":"^3.9.2","gulp-concat":"^2.6.1","gulp-less":"^4.0.0","gulp-rename":"^1.2.2","gulp-sass":"^3.1.0","gulp-uglify":"^3.0.0","json-loader":"^0.5.7","mocha":"^5.0.1","mocha-jscs":"^5.0.1","mocha-jshint":"^2.3.1","rimraf":"^2.6.2","uglifyjs-webpack-plugin":"^1.2.2","webpack":"^4.1.1","webpack-cli":"^2.0.10"},"deploy":["."],"format":"vertex","app":""};
-
-/***/ }),
-
-/***/ 171:
+/***/ 154:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -331,11 +406,108 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _turbo = __webpack_require__(170);
+var _superagent = __webpack_require__(12);
+
+var _superagent2 = _interopRequireDefault(_superagent);
+
+var _bluebird = __webpack_require__(10);
+
+var _bluebird2 = _interopRequireDefault(_bluebird);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// standard superagent get request:
+var getRequst = function getRequst(url, params) {
+	return new _bluebird2.default(function (resolve, reject) {
+		_superagent2.default.get(url).query(params).set('Accept', 'application/json').end(function (err, response) {
+			if (err) {
+				reject(err);
+				return;
+			}
+
+			var payload = response.body || response.text;
+			resolve(payload);
+		});
+	});
+};
+
+var postRequst = function postRequst(url, body) {
+	return new _bluebird2.default(function (resolve, reject) {
+		_superagent2.default.post(url).send(body).set('Accept', 'application/json').end(function (err, response) {
+			if (err) {
+				reject(err);
+				return;
+			}
+
+			var payload = response.body || response.text;
+			resolve(payload);
+		});
+	});
+};
+
+exports.default = {
+	post: function post(url, body, actionType) {
+		return function (dispatch) {
+			return postRequst(url, body).then(function (data) {
+				// console.log('DATA: ' + JSON.stringify(data))
+				if (actionType != null) {
+					dispatch({
+						type: actionType,
+						data: data
+					});
+				}
+
+				return data;
+			}).catch(function (err) {
+				throw err;
+			});
+		};
+	},
+
+	get: function get(url, params, actionType) {
+		return function (dispatch) {
+			return getRequst(url, params).then(function (data) {
+				// console.log('DATA: ' + JSON.stringify(data))
+				if (actionType != null) {
+					dispatch({
+						type: actionType,
+						data: data
+					});
+				}
+
+				return data;
+			}).catch(function (err) {
+				throw err;
+			});
+		};
+	}
+
+};
+
+/***/ }),
+
+/***/ 155:
+/***/ (function(module) {
+
+module.exports = {"name":"c1oachingWow","version":"0.0.0","server":false,"private":true,"scripts":{"dev":"webpack --mode development -w","build":"npm run clean && NODE_ENV=production webpack -p && gulp prod","clean":"rm -rf ./public/dist","postinstall":"npm run build"},"dependencies":{"accepts":"^1.3.5","array-flatten":"1.1.1","bluebird":"^3.5.1","body-parser":"1.18.2","content-disposition":"0.5.2","content-type":"^1.0.4","cookie":"0.3.1","cookie-signature":"1.0.6","debug":"2.6.9","depd":"^1.1.2","dotenv":"^5.0.1","encodeurl":"^1.0.2","escape-html":"^1.0.3","etag":"^1.8.1","finalhandler":"1.1.1","fresh":"0.5.2","merge-descriptors":"1.0.1","methods":"^1.1.2","moment":"^2.20.1","nodemon":"^1.17.1","on-finished":"^2.3.0","parseurl":"^1.3.2","path-to-regexp":"0.1.7","proxy-addr":"^2.0.3","qs":"6.5.1","range-parser":"^1.2.0","react":"^16.2.0","react-bootstrap":"^0.32.1","react-dom":"^16.2.0","react-dropzone":"^4.2.8","react-google-maps":"^9.4.5","react-redux":"^5.0.7","react-time":"^4.3.0","redux":"^3.7.2","redux-thunk":"^2.2.0","safe-buffer":"5.1.1","send":"0.16.2","serve-static":"1.13.2","setprototypeof":"1.1.0","statuses":"^1.4.0","superagent":"^3.8.2","turbo360":"latest","type-is":"^1.6.16","utils-merge":"1.0.1","vary":"^1.1.2","vertex360":"latest"},"devDependencies":{"babel-core":"^6.26.0","babel-loader":"^7.1.3","babel-preset-env":"^1.6.1","babel-preset-react":"^6.24.1","chai":"^4.1.2","chai-http":"^3.0.0","cross-env":"^5.1.4","gulp":"^3.9.1","gulp-6to5":"^3.0.0","gulp-autoprefixer":"^5.0.0","gulp-clean-css":"^3.9.2","gulp-concat":"^2.6.1","gulp-less":"^4.0.0","gulp-rename":"^1.2.2","gulp-sass":"^3.1.0","gulp-uglify":"^3.0.0","json-loader":"^0.5.7","mocha":"^5.0.1","mocha-jscs":"^5.0.1","mocha-jshint":"^2.3.1","rimraf":"^2.6.2","uglifyjs-webpack-plugin":"^1.2.2","webpack":"^4.1.1","webpack-cli":"^2.0.10"},"deploy":["."],"format":"vertex","app":""};
+
+/***/ }),
+
+/***/ 173:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _turbo = __webpack_require__(172);
 
 var _turbo2 = _interopRequireDefault(_turbo);
 
-var _package = __webpack_require__(153);
+var _package = __webpack_require__(155);
 
 var _package2 = _interopRequireDefault(_package);
 
@@ -482,7 +654,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 172:
+/***/ 174:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -491,19 +663,24 @@ exports.default = {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.TurboClient = undefined;
+exports.HTTPAsync = exports.TurboClient = undefined;
 
-var _TurboClient = __webpack_require__(171);
+var _TurboClient = __webpack_require__(173);
 
 var _TurboClient2 = _interopRequireDefault(_TurboClient);
+
+var _HTTPAsync = __webpack_require__(154);
+
+var _HTTPAsync2 = _interopRequireDefault(_HTTPAsync);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.TurboClient = _TurboClient2.default;
+exports.HTTPAsync = _HTTPAsync2.default;
 
 /***/ }),
 
-/***/ 173:
+/***/ 175:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -571,7 +748,7 @@ var localStyle = {
 
 /***/ }),
 
-/***/ 369:
+/***/ 371:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -589,7 +766,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactGoogleMaps = __webpack_require__(368);
+var _reactGoogleMaps = __webpack_require__(370);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -677,7 +854,7 @@ exports.default = (0, _reactGoogleMaps.withGoogleMap)(Map);
 
 /***/ }),
 
-/***/ 370:
+/***/ 372:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -695,7 +872,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _presentation = __webpack_require__(148);
 
-var _reactRedux = __webpack_require__(59);
+var _reactRedux = __webpack_require__(39);
 
 var _actions = __webpack_require__(93);
 
@@ -725,6 +902,11 @@ var Search = function (_Component) {
 	}
 
 	_createClass(Search, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			this.props.currentUser(); //MISSING () CAN CAUSE THE accountReducer NOT CONSOLE LOG
+		}
+	}, {
 		key: 'centerChanged',
 		value: function centerChanged(center) {
 			console.log('centerChanged: ' + JSON.stringify(center));
@@ -792,6 +974,9 @@ var dispatchToProps = function dispatchToProps(dispatch) {
 	return {
 		locationChanged: function locationChanged(location) {
 			return dispatch(_actions2.default.locationChanged(location));
+		},
+		currentUser: function currentUser() {
+			return dispatch(_actions2.default.currentUser());
 		}
 	};
 };
@@ -800,7 +985,7 @@ exports.default = (0, _reactRedux.connect)(stateToProps, dispatchToProps)(Search
 
 /***/ }),
 
-/***/ 371:
+/***/ 373:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -809,32 +994,36 @@ exports.default = (0, _reactRedux.connect)(stateToProps, dispatchToProps)(Search
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.Search = exports.Results = undefined;
+exports.Nav = exports.Search = exports.Results = undefined;
 
-var _Search = __webpack_require__(370);
+var _Search = __webpack_require__(372);
 
 var _Search2 = _interopRequireDefault(_Search);
 
-var _Results = __webpack_require__(152);
+var _Results = __webpack_require__(153);
 
 var _Results2 = _interopRequireDefault(_Results);
 
+var _Nav = __webpack_require__(152);
+
+var _Nav2 = _interopRequireDefault(_Nav);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* * * * * * * * * * * * * * * * * * * * * * * * * * *
-	Export your container components here. The Users
-	container is just an example and you will likely
-	remove it in favor of your own containers. 
-* * * * * * * * * * * * * * * * * * * * * * * * * * * *
-*/
-
-// import Users from './Users'
 exports.Results = _Results2.default;
 exports.Search = _Search2.default;
+exports.Nav = _Nav2.default; /* * * * * * * * * * * * * * * * * * * * * * * * * * *
+                             	Export your container components here. The Users
+                             	container is just an example and you will likely
+                             	remove it in favor of your own containers. 
+                             * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+                             */
+
+// import Users from './Users'
 
 /***/ }),
 
-/***/ 372:
+/***/ 374:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -850,7 +1039,7 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _containers = __webpack_require__(371);
+var _containers = __webpack_require__(373);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -858,17 +1047,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } //          <div className="row">
-// <ul id="reservations">                             
-//   <li class="reservation">
-//     Item1 
-//   </li> 
-//                     <li class="reservation">
-//                       Item2
-//                     </li>                                        
-// </ul>
-//       </div>
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+// import { Results } from './containers'
 
 var Home = function (_Component) {
     _inherits(Home, _Component);
@@ -887,7 +1068,10 @@ var Home = function (_Component) {
     _createClass(Home, [{
         key: 'render',
         value: function render() {
-            var markers = [{ id: 1, key: '1', defaultAnimation: 2, label: "Nike Jordan", position: { lat: 40.7224017, lng: -73.9896719 } }, { id: 2, key: '2', defaultAnimation: 2, label: "Nike Jordan", position: { lat: 40.7024017, lng: -73.9896719 } }];
+            // const markers = [
+            //     {id:1,key:'1', defaultAnimation:2,label:"Nike Jordan", position:{lat:40.7224017, lng:-73.9896719}},
+            //     {id:2,key:'2', defaultAnimation:2,label:"Nike Jordan", position:{lat:40.7024017, lng:-73.9896719}}
+            // ] 
 
             return _react2.default.createElement(
                 'div',
@@ -903,6 +1087,7 @@ var Home = function (_Component) {
                     _react2.default.createElement(
                         'div',
                         { className: 'col-md-5' },
+                        _react2.default.createElement(_containers.Nav, null),
                         _react2.default.createElement(_containers.Results, null)
                     ),
                     _react2.default.createElement(
@@ -922,7 +1107,7 @@ exports.default = Home;
 
 /***/ }),
 
-/***/ 375:
+/***/ 377:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -932,7 +1117,58 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _constants = __webpack_require__(57);
+var _constants = __webpack_require__(38);
+
+var _constants2 = _interopRequireDefault(_constants);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var initialState = {
+	// all: null,
+	currentUser: null // signed in user
+};
+
+exports.default = function () {
+	var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+	var action = arguments[1];
+
+	var updated = Object.assign({}, state);
+
+	switch (action.type) {
+
+		case _constants2.default.CURRENT_USER_RECEIVED:
+			console.log('CURRENT_USER_RECEIVED: ' + JSON.stringify(action.data));
+			updated['currentUser'] = action.data.user;
+			return updated;
+
+		// case constants.USERS_RECEIVED:
+		// 	newState['all'] = action.data
+		// 	return newState
+
+		// case constants.USER_CREATED:
+		// 	let array = (newState.all) ? Object.assign([], newState.all) : []
+		// 	array.unshift(action.data)
+		// 	newState['all'] = array
+		// 	return newState
+
+		default:
+			return state;
+	}
+};
+
+/***/ }),
+
+/***/ 378:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _constants = __webpack_require__(38);
 
 var _constants2 = _interopRequireDefault(_constants);
 
@@ -975,7 +1211,7 @@ exports.default = function () {
 
 /***/ }),
 
-/***/ 376:
+/***/ 379:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -985,7 +1221,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _constants = __webpack_require__(57);
+var _constants = __webpack_require__(38);
 
 var _constants2 = _interopRequireDefault(_constants);
 
@@ -1033,7 +1269,40 @@ exports.default = function () {
 
 /***/ }),
 
-/***/ 377:
+/***/ 38:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+	Here are a few sample constants for typical actions.
+	You may want to extends these to the other data
+	types for your project (e.g. BLOG_POST_CREATED, BLOG_POST_UPDATED, etc)
+* * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*/
+
+exports.default = {
+
+	ITEM_ADDED: 'ITEM_ADDED',
+	LOCATION_CHANGED: 'LOCATION_CHANGED',
+	CURRENT_USER_RECEIVED: 'CURRENT_USER_RECEIVED'
+	// USER_LOGGED_IN: 		'USER_LOGGED_IN',
+	// CURRENT_USER_RECEIVED: 	'CURRENT_USER_RECEIVED'
+
+	// USERS_RECEIVED: 		'USERS_RECEIVED',
+	// USER_CREATED: 			'USER_CREATED',
+	// USER_LOGGED_IN: 		'USER_LOGGED_IN',
+
+
+};
+
+/***/ }),
+
+/***/ 380:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1043,7 +1312,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _constants = __webpack_require__(57);
+var _constants = __webpack_require__(38);
 
 var _constants2 = _interopRequireDefault(_constants);
 
@@ -1090,7 +1359,7 @@ exports.default = function () {
 
 /***/ }),
 
-/***/ 378:
+/***/ 381:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1099,32 +1368,39 @@ exports.default = function () {
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.mapReducer = exports.itemReducer = exports.userReducer = undefined;
+exports.accountReducer = exports.mapReducer = exports.itemReducer = exports.userReducer = undefined;
 
-var _userReducer = __webpack_require__(377);
+var _userReducer = __webpack_require__(380);
 
 var _userReducer2 = _interopRequireDefault(_userReducer);
 
-var _itemReducer = __webpack_require__(376);
+var _itemReducer = __webpack_require__(379);
 
 var _itemReducer2 = _interopRequireDefault(_itemReducer);
 
-var _mapReducer = __webpack_require__(375);
+var _mapReducer = __webpack_require__(378);
 
 var _mapReducer2 = _interopRequireDefault(_mapReducer);
 
+var _accountReducer = __webpack_require__(377);
+
+var _accountReducer2 = _interopRequireDefault(_accountReducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * *
+	Export your reducers here
+* * * * * * * * * * * * * * * * * * * * * * * * * * * *
+*/
 
 exports.userReducer = _userReducer2.default;
 exports.itemReducer = _itemReducer2.default;
-exports.mapReducer = _mapReducer2.default; /* * * * * * * * * * * * * * * * * * * * * * * * * * *
-                                           	Export your reducers here
-                                           * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-                                           */
+exports.mapReducer = _mapReducer2.default;
+exports.accountReducer = _accountReducer2.default;
 
 /***/ }),
 
-/***/ 381:
+/***/ 384:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1136,11 +1412,11 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(87);
 
-var _reduxThunk = __webpack_require__(379);
+var _reduxThunk = __webpack_require__(382);
 
 var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _reducers = __webpack_require__(378);
+var _reducers = __webpack_require__(381);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1160,7 +1436,8 @@ exports.default = {
 		var reducers = (0, _redux.combineReducers)({ // insert reducers here
 			user: _reducers.userReducer,
 			item: _reducers.itemReducer,
-			map: _reducers.mapReducer
+			map: _reducers.mapReducer,
+			account: _reducers.accountReducer
 		});
 
 		if (initialState) {
@@ -1181,7 +1458,7 @@ exports.default = {
 
 /***/ }),
 
-/***/ 389:
+/***/ 392:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1195,25 +1472,17 @@ var _reactDom = __webpack_require__(84);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _stores = __webpack_require__(381);
+var _stores = __webpack_require__(384);
 
 var _stores2 = _interopRequireDefault(_stores);
 
-var _reactRedux = __webpack_require__(59);
+var _reactRedux = __webpack_require__(39);
 
-var _Home = __webpack_require__(372);
+var _Home = __webpack_require__(374);
 
 var _Home2 = _interopRequireDefault(_Home);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * *
-	This is the entry point of the React app with Redux
-	already implemented. The Intro component is the 
-	visual content and most likely, you will want 
-	to remove it and replace with your own visual content.
-* * * * * * * * * * * * * * * * * * * * * * * * * * * *
-*/
 
 var app = _react2.default.createElement(
 	_reactRedux.Provider,
@@ -1227,38 +1496,6 @@ _reactDom2.default.render(app, document.getElementById('root'));
 
 /***/ }),
 
-/***/ 57:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-/* * * * * * * * * * * * * * * * * * * * * * * * * * *
-	Here are a few sample constants for typical actions.
-	You may want to extends these to the other data
-	types for your project (e.g. BLOG_POST_CREATED, BLOG_POST_UPDATED, etc)
-* * * * * * * * * * * * * * * * * * * * * * * * * * * *
-*/
-
-exports.default = {
-
-	ITEM_ADDED: 'ITEM_ADDED',
-	LOCATION_CHANGED: 'LOCATION_CHANGED'
-	// USER_LOGGED_IN: 		'USER_LOGGED_IN',
-	// CURRENT_USER_RECEIVED: 	'CURRENT_USER_RECEIVED'
-
-	// USERS_RECEIVED: 		'USERS_RECEIVED',
-	// USER_CREATED: 			'USER_CREATED',
-	// USER_LOGGED_IN: 		'USER_LOGGED_IN',
-	// CURRENT_USER_RECEIVED: 	'CURRENT_USER_RECEIVED'
-
-};
-
-/***/ }),
-
 /***/ 93:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1269,11 +1506,11 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _constants = __webpack_require__(57);
+var _constants = __webpack_require__(38);
 
 var _constants2 = _interopRequireDefault(_constants);
 
-var _utils = __webpack_require__(172);
+var _utils = __webpack_require__(174);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -1296,6 +1533,20 @@ exports.default = {
 		return {
 			type: 'LOCATION_CHANGED',
 			data: location
+		};
+	},
+
+	//    currentuserReceived: (user) => {
+	// 	return {
+	// 		type: 'CURRENT_USER_RECEIVED',
+	// 		data: location
+	// 	}
+	// }
+
+	currentUser: function currentUser() {
+		console.log('GET CURRENT USER');
+		return function (dispatch) {
+			return dispatch(_utils.HTTPAsync.get('/auth/currentuser', null, _constants2.default.CURRENT_USER_RECEIVED));
 		};
 	}
 

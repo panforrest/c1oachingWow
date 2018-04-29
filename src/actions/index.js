@@ -1,5 +1,5 @@
 import constants from '../constants'
-import { TurboClient } from '../utils'
+import { TurboClient, HTTPAsync } from '../utils'
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
 	Here are a few sample actions for User managment.
@@ -20,6 +20,20 @@ export default {
 		return {
 			type: 'LOCATION_CHANGED',
 			data: location
+		}
+	},
+
+ //    currentuserReceived: (user) => {
+	// 	return {
+	// 		type: 'CURRENT_USER_RECEIVED',
+	// 		data: location
+	// 	}
+	// }
+
+	currentUser: () => {
+		console.log('GET CURRENT USER')
+		return dispatch => {
+			return dispatch(HTTPAsync.get('/auth/currentuser', null, constants.CURRENT_USER_RECEIVED))
 		}
 	}
 

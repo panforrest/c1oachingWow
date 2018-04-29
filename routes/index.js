@@ -7,27 +7,38 @@ const router = vertex.router()
 	Data is rendered using the Mustache templating engine. For more
 	information, view here: https://mustache.github.io/#demo */
 router.get('/', function(req, res){
-	res.render('index', {text: 'This is the dynamic data. Open index.js from the routes directory to see.'})
+	res.render('index', null)
 })
 
-/*  This route render json data */
-router.get('/json', function(req, res){
-	res.json({
-		confirmation: 'success',
-		app: process.env.TURBO_APP_ID,
-		data: 'this is a sample json route.'
-	})
+router.get('/auth', function(req, res){
+	res.render('auth', null)
 })
 
-/*  This route sends text back as plain text. */
-router.get('/send', function(req, res){
-	res.send('This is the Send Route')
-})
+// router.post('/auth/register', function(req, res){
+// 	res.json({
+// 		confirmation: 'success',
+// 		data: query.body
+// 	})
+// })
 
-/*  This route redirects requests to Turbo360. */
-router.get('/redirect', function(req, res){
-	res.redirect('https://www.turbo360.co/landing')
-})
+// /*  This route render json data */
+// router.get('/json', function(req, res){
+// 	res.json({
+// 		confirmation: 'success',
+// 		app: process.env.TURBO_APP_ID,
+// 		data: 'this is a sample json route.'
+// 	})
+// })
+
+//   This route sends text back as plain text. 
+// router.get('/send', function(req, res){
+// 	res.send('This is the Send Route')
+// })
+
+// /*  This route redirects requests to Turbo360. */
+// router.get('/redirect', function(req, res){
+// 	res.redirect('https://www.turbo360.co/landing')
+// })
 
 
 module.exports = router

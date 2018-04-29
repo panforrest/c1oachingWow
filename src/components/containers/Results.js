@@ -80,7 +80,8 @@ const localStyle = {
 const stateToProps = (state) => {
     return {
         item: state.item,
-        map: state.map
+        map: state.map,
+        account: state.account
     }
 }
 
