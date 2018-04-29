@@ -47,7 +47,7 @@ class Results extends Component {
         }
 
         const currentUser = this.props.account.currentUser
-        let updated = Object.assign({}, this.state.itme)
+        let updated = Object.assign({}, this.state.item)
         updated['seller'] = {
             id: currentUser.id,
             username: currentUser.username,
@@ -108,7 +108,7 @@ class Results extends Component {
 			                    
                 </div>
                 <hr />
-                <input onChange={this.updateItem.bind(this, 'label')} className="formControl" type="text" placeholder="Item" /><br /><br />	
+                <input onChange={this.updateItem.bind(this, 'name')} className="formControl" type="text" placeholder="Name" /><br /><br />	
                 <input onChange={this.updateItem.bind(this, 'price')} className="formControl" type="text" placeholder="Price" /><br /><br />    
                 { (this.state.item.image == null) ? null: <img src={this.state.item.image+'=s120-c'} />
 

@@ -74,7 +74,7 @@ var Results = (function (Component) {
                 }
 
                 var currentUser = this.props.account.currentUser;
-                var updated = Object.assign({}, this.state.itme);
+                var updated = Object.assign({}, this.state.item);
                 updated.seller = {
                     id: currentUser.id,
                     username: currentUser.username,
@@ -136,7 +136,7 @@ var Results = (function (Component) {
                         })
                     ),
                     React.createElement("hr", null),
-                    React.createElement("input", { onChange: this.updateItem.bind(this, "label"), className: "formControl", type: "text", placeholder: "Item" }),
+                    React.createElement("input", { onChange: this.updateItem.bind(this, "name"), className: "formControl", type: "text", placeholder: "Name" }),
                     React.createElement("br", null),
                     React.createElement("br", null),
                     React.createElement("input", { onChange: this.updateItem.bind(this, "price"), className: "formControl", type: "text", placeholder: "Price" }),

@@ -45,21 +45,6 @@ var Nav = (function (Component) {
 					React.createElement(
 						"a",
 						{ "class": "nav-tab", href: "#" },
-						"Dashboard"
-					),
-					React.createElement(
-						"a",
-						{ "class": "nav-tab", href: "#" },
-						"Reservations"
-					),
-					React.createElement(
-						"a",
-						{ "class": "nav-tab", href: "#" },
-						" Profiles "
-					),
-					React.createElement(
-						"a",
-						{ "class": "nav-tab", href: "#" },
 						" ",
 						currentUser == null ? null : React.createElement(
 							"p",
