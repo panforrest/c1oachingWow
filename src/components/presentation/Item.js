@@ -11,7 +11,9 @@ export default (props) => {
 
             
             <div style={localStyle.itemImage}>
-                <img style={localStyle.itemImage} src={item.image} />
+                <a onClick={props.onPurchase.bind(this)} herf="#">  
+                    <img style={localStyle.itemImage} src={item.image} />
+                </a>
             </div>
             <h2>{item.name}</h2> 
             <span class="reservation-date">${item.price} </span>

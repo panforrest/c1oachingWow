@@ -279,6 +279,8 @@ var _actions2 = _interopRequireDefault(_actions);
 
 var _presentation = __webpack_require__(149);
 
+var _reactBootstrap = __webpack_require__(436);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -286,8 +288,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-// import { Input } from '../containers'
 
 var Results = function (_Component) {
     _inherits(Results, _Component);
@@ -298,6 +298,7 @@ var Results = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Results.__proto__ || Object.getPrototypeOf(Results)).call(this));
 
         _this.state = {
+            showModal: false,
             item: {
                 // position:{lat:40.70224017, lng:-73.9796719}
             }
@@ -313,8 +314,18 @@ var Results = function (_Component) {
             this.props.fetchItems();
         }
     }, {
+        key: 'onPurchase',
+        value: function onPurchase(item, event) {
+            event.preventDefault();
+            this.setState({
+                showModal: true
+            });
+            console.log('onPurchase: ' + JSON.stringify(item));
+        }
+    }, {
         key: 'render',
         value: function render() {
+            var _this2 = this;
 
             var items = this.props.item.all || [];
 
@@ -325,8 +336,29 @@ var Results = function (_Component) {
                     'div',
                     { className: 'row' },
                     items.map(function (item, i) {
-                        return _react2.default.createElement(_presentation.Item, { key: item.id, item: item });
+                        return _react2.default.createElement(_presentation.Item, { key: item.id, onPurchase: _this2.onPurchase.bind(_this2, item), item: item });
                     })
+                ),
+                _react2.default.createElement(
+                    _reactBootstrap.Modal,
+                    { bsSize: 'sm', show: this.state.showModal, onHide: function onHide() {
+                            _this2.setState({ showModal: false });
+                        } },
+                    _react2.default.createElement(
+                        _reactBootstrap.Modal.Body,
+                        { style: localStyle.modal },
+                        _react2.default.createElement(
+                            'h2',
+                            null,
+                            'Purchase Item'
+                        ),
+                        _react2.default.createElement('textarea', { placeholder: 'Enter Message Here', className: 'form-control' }),
+                        _react2.default.createElement(
+                            'button',
+                            { className: 'btn btn-success btn-fill' },
+                            'Sign up class!'
+                        )
+                    )
                 )
             );
         }
@@ -334,6 +366,13 @@ var Results = function (_Component) {
 
     return Results;
 }(_react.Component);
+
+var localStyle = {
+    input: {
+        border: '1px solid #ddd',
+        marginBottom: 12
+    }
+};
 
 var stateToProps = function stateToProps(state) {
     return {
@@ -672,7 +711,11 @@ exports.default = function (props) {
                 _react2.default.createElement(
                     "div",
                     { style: localStyle.itemImage },
-                    _react2.default.createElement("img", { style: localStyle.itemImage, src: item.image })
+                    _react2.default.createElement(
+                        "a",
+                        { onClick: props.onPurchase.bind(undefined), herf: "#" },
+                        _react2.default.createElement("img", { style: localStyle.itemImage, src: item.image })
+                    )
                 ),
                 _react2.default.createElement(
                     "h2",
