@@ -1,8 +1,8 @@
-                // { (currentUser == null) ? <Register onRegister={this.register.bind(this)} onLogin={this.login.bind(this)} /> : 
 import React, { Component } from 'react'
 import { Register } from '../presentation'
 import { connect } from 'react-redux'
 import actions from '../../actions'
+import { Input } from '../containers'
 
 class Account extends Component {
 
@@ -28,6 +28,7 @@ class Account extends Component {
                   <div>  
                     <h2>Welcome!</h2>
                     <h2>{currentUser.username}</h2> 
+                    <Input />
                   </div>
                 }
 

@@ -10,12 +10,14 @@ import Search from './Search'
 import Results from './Results'
 import Nav from './Nav'
 import Account from './Account'
+import Input from './Input'
 
 export {
 
 	Results,
 	Search,
 	Nav,
-	Account
+	Account,
+	Input
 	
 }
