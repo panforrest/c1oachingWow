@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Search, Results, Nav } from './containers'
-// import { Results } from './containers'
+import { Account } from './containers'
 
 class Home extends Component {
 
@@ -30,7 +30,7 @@ class Home extends Component {
         	        </div> 
 
         	        <div className="col-md-3">
-        	            ACCOUNT
+        	            <Account /> 
         	        </div>
 
         	    </div>

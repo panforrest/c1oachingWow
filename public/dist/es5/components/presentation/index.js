@@ -9,8 +9,11 @@ var Map = _interopRequire(require("./Map"));
 
 var Item = _interopRequire(require("./Item"));
 
+var Register = _interopRequire(require("./Register"));
+
 exports.Item = Item;
 exports.Map = Map;
+exports.Register = Register;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });

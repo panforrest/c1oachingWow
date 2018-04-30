@@ -42,6 +42,18 @@ module.exports = {
 		};
 	},
 
+	signup: function (params) {
+		return function (dispatch) {
+			return dispatch(HTTPAsync.post("/auth/register", params, constants.CURRENT_USER_RECEIVED));
+		};
+	},
+
+	login: function (params) {
+		return function (dispatch) {
+			return dispatch(HTTPAsync.post("/auth/login", params, constants.CURRENT_USER_RECEIVED));
+		};
+	},
+
 	//    currentuserReceived: (user) => {
 	// 	return {
 	// 		type: 'CURRENT_USER_RECEIVED',

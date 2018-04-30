@@ -13,7 +13,7 @@ class Nav extends Component {
             <nav>
 			    <span class="navbar-brand mb-0 h1">CoachingWow</span>
 
-			    <a class="nav-tab" href="#"> { (currentUser==null) ? null: <p>Welcome, {currentUser.username}</p> } </a>
+			    <a class="nav-tab" href="/auth/logout"> { (currentUser==null) ? null: <p>Log out</p> } </a>
 			</nav>
 		)
 	}

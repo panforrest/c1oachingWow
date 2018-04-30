@@ -20,8 +20,7 @@ var _containers = require("./containers");
 var Search = _containers.Search;
 var Results = _containers.Results;
 var Nav = _containers.Nav;
-// import { Results } from './containers'
-
+var Account = _containers.Account;
 var Home = (function (Component) {
     function Home() {
         _classCallCheck(this, Home);
@@ -62,7 +61,7 @@ var Home = (function (Component) {
                         React.createElement(
                             "div",
                             { className: "col-md-3" },
-                            "ACCOUNT"
+                            React.createElement(Account, null)
                         )
                     )
                 );

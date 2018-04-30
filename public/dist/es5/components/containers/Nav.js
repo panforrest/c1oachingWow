@@ -44,13 +44,12 @@ var Nav = (function (Component) {
 					),
 					React.createElement(
 						"a",
-						{ "class": "nav-tab", href: "#" },
+						{ "class": "nav-tab", href: "/auth/logout" },
 						" ",
 						currentUser == null ? null : React.createElement(
 							"p",
 							null,
-							"Welcome, ",
-							currentUser.username
+							"Log out"
 						),
 						" "
 					)

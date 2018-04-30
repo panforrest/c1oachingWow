@@ -100,7 +100,7 @@ class Results extends Component {
 			                    
                 </div>
                 <hr />
-                <input onChange={this.updateItem.bind(this, 'name')} className="formControl" type="text" placeholder="Name" /><br /><br />	
+                <input onChange={this.updateItem.bind(this, 'name')} className="formControl" type="text" placeholder="Class Name" /><br /><br />	
                 <input onChange={this.updateItem.bind(this, 'price')} className="formControl" type="text" placeholder="Price" /><br /><br />    
                 { (this.state.item.image == null) ? null: <img src={this.state.item.image+'=s120-c'} />
 

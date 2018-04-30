@@ -7,10 +7,10 @@ router.post('/register', function(req, res){
     turbo.createUser(params)
 	.then(data => {
 		req.vertexSession.user = {id: data.id} // set session with user ID
-	    // res.json({
-	    // 	confirmation: 'success',
-	    // 	data: data
-	    // })
+	    res.json({
+	    	confirmation: 'success',
+	    	user: data
+	    })
 	    res.redirect('/')//REDIRECT TO THE MAP AFER CREATE NEW USER
 	})
 	.catch(err => {
@@ -19,6 +19,30 @@ router.post('/register', function(req, res){
             message: err.message
 	    })
 	})    
+})
+
+router.post('/login', function(req, res){
+	var params = req.body
+    turbo.login(params)
+	.then(data => {
+		req.vertexSession.user = {id: data.id} // set session with user ID
+	    res.json({
+	    	confirmation: 'success',
+	    	user: data
+	    })
+	    res.redirect('/')//REDIRECT TO THE MAP AFER CREATE NEW USER
+	})
+	.catch(err => {
+	    res.json({
+            confirmation: 'fail',
+            message: err.message
+	    })
+	})    
+})
+
+router.get('/logout', function(req, res){
+	req.vertexSession.reset()
+	res.redirect('/')
 })
 
 router.get('/currentuser', function(req, res){

@@ -16,9 +16,12 @@ var Results = _interopRequire(require("./Results"));
 
 var Nav = _interopRequire(require("./Nav"));
 
+var Account = _interopRequire(require("./Account"));
+
 exports.Results = Results;
 exports.Search = Search;
 exports.Nav = Nav;
+exports.Account = Account;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });

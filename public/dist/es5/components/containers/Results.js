@@ -128,7 +128,7 @@ var Results = (function (Component) {
                         })
                     ),
                     React.createElement("hr", null),
-                    React.createElement("input", { onChange: this.updateItem.bind(this, "name"), className: "formControl", type: "text", placeholder: "Name" }),
+                    React.createElement("input", { onChange: this.updateItem.bind(this, "name"), className: "formControl", type: "text", placeholder: "Class Name" }),
                     React.createElement("br", null),
                     React.createElement("br", null),
                     React.createElement("input", { onChange: this.updateItem.bind(this, "price"), className: "formControl", type: "text", placeholder: "Price" }),
